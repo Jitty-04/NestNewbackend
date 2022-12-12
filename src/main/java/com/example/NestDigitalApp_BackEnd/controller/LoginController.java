@@ -5,12 +5,10 @@ import com.example.NestDigitalApp_BackEnd.dao.VisitorDao;
 import com.example.NestDigitalApp_BackEnd.model.EmpLog;
 import com.example.NestDigitalApp_BackEnd.model.VisitorLog;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -40,12 +38,31 @@ public class LoginController {
         System.out.println(v.getName().toString());
         System.out.println(v.getPurpose().toString());
         System.out.println(v.getWhomtomeet().toString());
+        System.out.println(v.getDate().toString());
         System.out.println(v.getEntry_datetime().toString());
         System.out.println(v.getExit_datetime().toString());
         d.save(v);
         HashMap<String,String> map=new HashMap<>();
         map.put("status","success");
         return map;
+    }
+
+@CrossOrigin(origins = "*")
+    @GetMapping("/viewallemployeelog")
+    public List<EmpLog> Viewallemployee(){
+        return (List<EmpLog>) dao.findAll();
+}
+@CrossOrigin(origins ="*")
+    @PostMapping(path ="/viewdailyemployeelog",consumes = "application/json",produces = "application/json")
+    public List<EmpLog> ViewDailyEmployeeLog(@RequestBody EmpLog e)
+{
+    return (List<EmpLog>) dao.ViewDailyEmployeeLog(e.getDate());
+}
+    @CrossOrigin(origins ="*")
+    @PostMapping(path ="/viewdailyvisitorelog",consumes = "application/json",produces = "application/json")
+    public List<VisitorLog> ViewDailyVisitorLog(@RequestBody VisitorLog v)
+    {
+        return (List<VisitorLog>) d.ViewDailyVisitorLog(v.getDate());
     }
 
 
