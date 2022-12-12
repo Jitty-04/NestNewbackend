@@ -5,12 +5,10 @@ import com.example.NestDigitalApp_BackEnd.dao.VisitorDao;
 import com.example.NestDigitalApp_BackEnd.model.EmpLog;
 import com.example.NestDigitalApp_BackEnd.model.LeaveApplication;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -35,6 +33,25 @@ public class LeaveController {
         map.put("status","success");
         return map;
     }
+@CrossOrigin(origins = "*")
+    @GetMapping(path="/viewallleave")
+    public List<Map<String,String>>viewallleave(){
+        return(List<Map<String, String>>) dao.viewleave();
+}
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/update",consumes = "application/json",produces = "application/json")
+    public Map<String,String> Updatestatus(@RequestBody LeaveApplication l)
+    {
+       String empid=String.valueOf(l.getEmpid());
+        String status=l.getStatus().toString();
+        System.out.println(empid);
+        System.out.println(status);
+        dao.updateStatus(l.getEmpid(),l.getStatus());
+        HashMap<String,String> map=new HashMap<>();
+        map.put("status","success");
+        return map;
+    }
+
 
 
 }
