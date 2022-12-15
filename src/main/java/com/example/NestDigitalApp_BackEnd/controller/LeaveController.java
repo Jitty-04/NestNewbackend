@@ -33,11 +33,12 @@ public class LeaveController {
         map.put("status","success");
         return map;
     }
-@CrossOrigin(origins = "*")
-    @GetMapping(path="/viewallleave")
-    public List<Map<String,String>>viewallleave(){
-        return(List<Map<String, String>>) dao.viewleave();
-}
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/viewallleave")
+    public List<Map<String,String>> ViewAllLeave()
+    {
+        return (List<Map<String, String>>) dao.ViewAllLeave();
+    }
     @CrossOrigin(origins = "*")
     @PostMapping(path = "/update",consumes = "application/json",produces = "application/json")
     public Map<String,String> Updatestatus(@RequestBody LeaveApplication l)
