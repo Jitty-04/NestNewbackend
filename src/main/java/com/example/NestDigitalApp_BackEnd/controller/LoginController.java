@@ -64,6 +64,12 @@ public class LoginController {
     {
         return (List<VisitorLog>) d.ViewDailyVisitorLog(v.getDate());
     }
+    @CrossOrigin(origins = "*")
+    @GetMapping(path = "/viewallvisitorlog")
+    public List<VisitorLog> ViewAllVisitorLog()
+    {
+        return (List<VisitorLog>) d.findAll();
+    }
 
 
 }
