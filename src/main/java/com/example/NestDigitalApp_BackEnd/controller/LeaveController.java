@@ -3,6 +3,7 @@ package com.example.NestDigitalApp_BackEnd.controller;
 import com.example.NestDigitalApp_BackEnd.dao.LiveApplicationDao;
 import com.example.NestDigitalApp_BackEnd.dao.VisitorDao;
 import com.example.NestDigitalApp_BackEnd.model.EmpLog;
+import com.example.NestDigitalApp_BackEnd.model.Employ;
 import com.example.NestDigitalApp_BackEnd.model.LeaveApplication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -52,6 +53,15 @@ public class LeaveController {
         map.put("status","success");
         return map;
     }
+    @CrossOrigin(origins = "*")
+    @PostMapping(path = "/searchstatus",consumes = "application/json",produces = "application/json")
+    public List<LeaveApplication> SearchStatus(@RequestBody LeaveApplication l)
+    {
+        String empid=String.valueOf(l.getEmpid());
+        System.out.println(empid);
+        return (List<LeaveApplication>) dao.SearchStatus(l.getEmpid());
+    }
+
 
 
 

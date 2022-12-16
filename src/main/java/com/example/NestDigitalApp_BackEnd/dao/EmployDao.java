@@ -23,4 +23,6 @@ public interface EmployDao extends CrudRepository<Employ, Integer> {
 
     @Query(value = "SELECT `id`, `designation`, `empcode`, `empname`, `password`, `salary`, `username` FROM `empdetails` WHERE `id`= :id",nativeQuery = true)
     List<Employ> EmpViewByID(@Param("id") Integer id);
+
+
 }
