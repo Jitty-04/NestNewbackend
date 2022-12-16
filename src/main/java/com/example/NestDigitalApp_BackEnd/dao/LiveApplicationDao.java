@@ -1,6 +1,7 @@
 package com.example.NestDigitalApp_BackEnd.dao;
 
 import com.example.NestDigitalApp_BackEnd.model.EmpLog;
+import com.example.NestDigitalApp_BackEnd.model.Employ;
 import com.example.NestDigitalApp_BackEnd.model.LeaveApplication;
 import com.example.NestDigitalApp_BackEnd.model.LeaveCounter;
 import jakarta.transaction.Transactional;
@@ -20,4 +21,7 @@ public interface LiveApplicationDao extends CrudRepository<LeaveApplication,Inte
     @Transactional
     @Query(value = "UPDATE `leaveapplication` SET `status`=:status  WHERE `empid`=:empid",nativeQuery = true)
     void updateStatus(@Param("empid") Integer empid,@Param("status")String status);
+
+    @Query(value = "SELECT `id`, `apply_date`, `empid`, `from_date`, `leavetype`, `remarks`, `status`, `to_date` FROM `leaveapplication` WHERE `id`= :empid",nativeQuery = true)
+    List<LeaveApplication> SearchStatus(@Param("empid") Integer empid);
 }
