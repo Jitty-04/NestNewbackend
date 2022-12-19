@@ -5,6 +5,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "leavecount")
 public class LeaveCounter {
@@ -13,7 +15,7 @@ public class LeaveCounter {
     @GeneratedValue
     private int id;
     private int empid;
-    private int year;
+    private String year;
     private int casual=20;
     private int sick=7;
     private int other=3;
@@ -21,7 +23,7 @@ public class LeaveCounter {
     public LeaveCounter() {
     }
 
-    public LeaveCounter(int id, int empid, int year, int casual, int sick, int other) {
+    public LeaveCounter(int id, int empid, String year, int casual, int sick, int other) {
         this.id = id;
         this.empid = empid;
         this.year = year;
@@ -46,11 +48,11 @@ public class LeaveCounter {
         this.empid = empid;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 

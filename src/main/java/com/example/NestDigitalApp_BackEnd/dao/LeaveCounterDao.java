@@ -17,5 +17,9 @@ public interface LeaveCounterDao extends CrudRepository<LeaveCounter ,Integer> {
     @Transactional
     @Query(value = "UPDATE `leavecount` SET `casual`= :casual,`other`= :other,`sick`= :sick WHERE `empid`= :empid",nativeQuery = true)
     void UpdateCounter(@Param("empid") Integer empid,@Param("casual") Integer casual,@Param("other") Integer other,@Param("sick") Integer sick);
+
+
+    @Query(value="SELECT `id`, `casual`, `empid`, `other`, `sick`, `year` FROM `leavecount` WHERE `empid`= :empid",nativeQuery = true)
+    List<LeaveCounter> ViewPendingLeaves(@Param("empid") Integer empid);
 }
 

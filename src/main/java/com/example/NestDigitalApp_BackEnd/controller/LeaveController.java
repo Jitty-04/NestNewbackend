@@ -24,6 +24,7 @@ public class LeaveController {
     private LiveApplicationDao dao;
     @Autowired
     private LeaveCounterDao ldao;
+    int casual,sick,special;
 
     Date currentdate=new Date();
     @CrossOrigin(origins = "*")
@@ -118,7 +119,13 @@ public class LeaveController {
         return map;
     }
 
-
+    @CrossOrigin(origins = "*")
+    @PostMapping(path="/viewpendingleaves")
+    public List<LeaveCounter> ViewPendingLeaves(@RequestBody LeaveCounter lc){
+        String empid=String.valueOf(lc.getEmpid());
+        System.out.println(empid);
+        return (List<LeaveCounter>) ldao.ViewPendingLeaves(lc.getEmpid());
+    }
 
 
 
